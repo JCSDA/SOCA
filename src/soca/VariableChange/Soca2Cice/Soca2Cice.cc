@@ -25,9 +25,11 @@ Soca2Cice::Soca2Cice(const Geometry & geom,
 {
   util::Timer timer("soca::Soca2Cice", "Soca2Cice");
 
-  const eckit::Configuration * soca2ciceconfig = &conf;
+  Parameters params;
+  params.deserialize(conf);
+
   soca_soca2cice_setup_f90(keySoca2Cice_,
-                           &soca2ciceconfig,
+                           params.toConfiguration(),
                            geom_.toFortran());
 }
 
